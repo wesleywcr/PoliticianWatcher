@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "presidential_poll_app",
+    "slug": "presidential_poll_app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
