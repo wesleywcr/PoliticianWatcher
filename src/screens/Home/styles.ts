@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
 flex: 1;
-background-color: #000;
+background-color: #121212;
 justify-content: center;
 align-items: center;
 
@@ -13,6 +13,7 @@ export const Box = styled.View`
  width: ${Dimensions.get("screen").width};
   height: 70%;
  padding: 10px 10px;
+ margin-top: 70px;
  
   
 `;
