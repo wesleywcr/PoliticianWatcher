@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  background-color: green;
+
+export const Container = styled.TouchableOpacity`
+  background-color: #9ec7cc;
   border-radius: 5px;
   width: 100%;
   height: 100px;
@@ -22,13 +23,15 @@ margin-left: 10px;
 `;
 export const PoliticalParty = styled.Text`
  font-size: 10px;
-  color: #fefefe;
+ font-family: 'Oswald-Regular';
+  color: #343b44;
   text-align:justify;
   
 `;
 export const Name = styled.Text`
   font-size: 20px;
-  color: #fefefe;
+  font-family: 'Oswald-Regular';
+  color: #343b44;
   text-align:justify;
  
 `;

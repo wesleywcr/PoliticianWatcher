@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Box, Container, Name, Photo, PoliticalParty } from './styles';
 
@@ -16,6 +15,7 @@ export function CardDeputs({ name,party,photo}: CardDeputsProps) {
       <Name>{name}</Name>
      <PoliticalParty>{party}</PoliticalParty>
      </Box>
+    
     </Container>
   );
 }
