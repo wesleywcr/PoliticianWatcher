@@ -35,6 +35,8 @@ interface InfoProps {
   schooling: string;
   nationality: string;
   signature: string;
+  urlImage:string;
+  state:string;
 }
 export function Info({
   name,
@@ -45,11 +47,13 @@ export function Info({
   schooling,
   nationality,
   signature,
+  urlImage,
+  state,
 }: InfoProps) {
   const Brasao = useImage(require('../../assets/images/brasao.png'));
   const Chip = useImage(require('../../assets/images/chip.png'));
   const Profile = useImage(
-    'https://www.camara.leg.br/internet/deputado/bandep/204536.jpg'
+    urlImage
   );
   const font = useFont(OswaldFont, 18);
   const fontBold = useFont(OswaldFontBold, 18);
@@ -135,7 +139,7 @@ export function Info({
           y={height - 210}
           font={font}
           color="#343b44"
-          text="Data de Nascimento:"
+          text="Nascimento:"
         />
         <Text
           x={85}
@@ -153,7 +157,7 @@ export function Info({
         />
         <Text x={130} y={height - 230} font={font} color="#343b44" text={sex} />
         <Text
-          x={240}
+          x={170}
           y={height - 210}
           font={font}
           color="#343b44"
@@ -180,7 +184,7 @@ export function Info({
           y={height - 50}
           font={font}
           color="#343b44"
-          text="Nacionalidade:"
+          text="Nascido em:"
         />
         <Text
           x={80}
@@ -190,14 +194,14 @@ export function Info({
           text={politicalParty}
         />
         <Text
-          x={125}
+          x={110}
           y={height - 70}
           font={fontSemiBold}
           color="#000"
           text={schooling}
         />
         <Text
-          x={130}
+          x={110}
           y={height - 50}
           font={fontSemiBold}
           color="#000"
@@ -205,7 +209,7 @@ export function Info({
         />
 
         <Text
-          x={140}
+          x={100}
           y={height - 25}
           font={fontAss}
           color="#000"
@@ -217,7 +221,7 @@ export function Info({
           y={height - 29}
           font={fontSemiBold}
           color="#000"
-          text={`SP`}
+          text={state}
         />
       </Group>
     </Canvas>
