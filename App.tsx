@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Details } from './src/screens/Details';
-import { Home } from './src/screens/Home';
+import { Details } from './src/styles/Details';
+import { Home } from './src/styles/Home';
 import { useFonts } from 'expo-font';
 const queryClient = new QueryClient();
 
@@ -17,7 +17,7 @@ export function App() {
   }
   return (
     <QueryClientProvider client={queryClient}>
-      <Details />
+     <Text>Ola</Text>
     </QueryClientProvider>
   );
 }
