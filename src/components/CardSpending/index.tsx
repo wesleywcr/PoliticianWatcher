@@ -22,10 +22,10 @@ export function CardSpending({ data, selected, ...rest }: Props) {
       <Title>{data.label}</Title>
 
       <Amount>
-        {data.value.toLocaleString('pt-BR', {
+        {`R$${data.value.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
-        })}
+        })}`}
       </Amount>
     </Container>
   );

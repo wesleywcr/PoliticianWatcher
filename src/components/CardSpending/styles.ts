@@ -17,6 +17,7 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   align-items: center;
   background: #FFF;
   overflow: hidden;
+  border-radius: 10px;
   border: ${({ selected, color }) => selected ? `4px solid ${color}` : 'none'};
 `;
 
