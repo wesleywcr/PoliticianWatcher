@@ -3,7 +3,7 @@ import { Picker } from '@react-native-picker/picker';
 
 import { Container } from './styles';
 
-type MonthsProps = 'Janeiro' | 'Fevereiro' | 'Março';
+type MonthsProps = '1' | '2' | '3';
 
 type Props = {
   selectedValue: MonthsProps;
@@ -32,7 +32,7 @@ export function Selected({ selectedValue, onValueChange, data }: Props) {
         }}
       >
         {data.map((item) => (
-          <Picker.Item key={item.label} label={item.label} value={item.label} />
+          <Picker.Item key={item.label} label={item.label} value={item.value} />
         ))}
       </Picker>
     </Container>
