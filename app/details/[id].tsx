@@ -25,7 +25,12 @@ import { IDeputsResponse } from '../../src/models';
 
 export default function Det() {
   const { id } = useSearchParams();
-  console.warn('Id', id);
+  const [total, setTotal] = useState(0);
+  const [selected, setSelected] = useState('');
+  const [dataChart, setDataChart] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [month, setMonth] = useState<any>('2');
+  const [year, setYear] = useState<any>('Janeiro');
   const MONTHS = [
     { label: 'Janeiro', value: '1' },
     { label: 'Fevereiro', value: '2' },
@@ -40,9 +45,6 @@ export default function Det() {
     { label: 'Novembro', value: '11' },
     { label: 'Dezembro', value: '12' },
   ];
-  const [loading, setLoading] = useState(false);
-  const [month, setMonth] = useState<any>('1');
-  const [year, setYear] = useState<any>('Janeiro');
 
   const API_URL = 'https://dadosabertos.camara.leg.br/api/v2';
   const queryClient = useQueryClient();
@@ -70,23 +72,12 @@ export default function Det() {
       },
       {
         enabled: !!id,
-        //    refetchOnWindowFocus: true,
+        refetchOnWindowFocus: true,
         //staleTime: 1000 * 30, //30seg
         // refetchInterval: 1000 * 20, //20seg
-        //   retry: 4,
-        //initialData:[]//sempre os isLoading vai ser false;
+        retry: 4,
       }
     );
-
-  const dataId = [
-    { x: 'Despesas com saúde', y: 30 },
-    { x: 'Despesas com educação', y: 50 },
-    { x: 'Despesas com transporte', y: 60 },
-  ];
-
-  const [total, setTotal] = useState(0);
-  const [selected, setSelected] = useState('');
-  const [dataChart, setDataChart] = useState<any[]>([]);
 
   function handleCardOnPress(id: string) {
     setSelected((prev) => (prev === id ? '' : id));
