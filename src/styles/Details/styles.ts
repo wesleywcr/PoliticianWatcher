@@ -6,6 +6,7 @@ background-color: #121212;//#413F42
 padding: 16px;
 align-items: center;
 justify-content: center;
+margin-top: 16px;
 `;
 export const Box = styled.View`
 align-items: center;

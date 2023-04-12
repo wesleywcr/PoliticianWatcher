@@ -18,7 +18,7 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   background: #FFF;
   overflow: hidden;
   border-radius: 10px;
-  border: ${({ selected, color }) => selected ? `4px solid ${color}` : 'none'};
+ // border: ${({ selected, color }) => selected ? `4px solid ${color}` : 'none'};
 `;
 
 export const Tag = styled.View<TagProps>`
