@@ -4,16 +4,11 @@ import { ActivityIndicator, Dimensions, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { Box, Container, Name } from '../../src/styles/Home/styles';
 import { FlashList } from '@shopify/flash-list';
-import {
-  useQuery,
-  useQueryClient,
-} from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 
 import { SearchBar } from '../../src/components/SearchBar';
 import { CardDeputs } from '../../src/components/CardDeputs';
-
-
 
 export interface List {
   id: number;
@@ -62,25 +57,24 @@ export default function Home() {
         onChangeText={setSearchDeputy}
         onSubmitEditing={handleSearch}
       />
-       
+
       <Box>
         {isLoading ? (
           <ActivityIndicator color={'red'} />
         ) : (
           <FlashList
             data={data}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
-       
-         <CardDeputs
+              <CardDeputs
                 key={item.id}
                 name={item.nome}
                 party={item.siglaPartido}
                 photo={item.urlFoto}
                 onPress={() => {
-                  router.push(`/details/${item.id}`)}}
+                  router.push(`/details/${item.id}`);
+                }}
               />
-        
-             
             )}
             estimatedItemSize={200}
           />

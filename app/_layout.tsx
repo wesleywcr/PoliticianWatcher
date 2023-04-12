@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { Stack, Slot } from 'expo-router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ActivityIndicator } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
@@ -17,6 +18,7 @@ export default function RootLayout() {
   }
   return (
     <QueryClientProvider client={queryClient}>
+      <StatusBar style="light" />
       {fontsLoaded ? <Slot /> : <ActivityIndicator color={'red'} />}
     </QueryClientProvider>
     // <Stack screenOptions={{ headerShown: false }}>

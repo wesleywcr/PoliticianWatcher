@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -10,15 +10,18 @@ import { Link, useFocusEffect } from 'expo-router';
 import { useSearchParams } from 'expo-router';
 import axios from 'axios';
 import { useQuery, useQueryClient } from 'react-query';
-import { BoxCard, Container, Title, Tot } from '../../src/styles/Details/styles';
+import {
+  BoxCard,
+  Container,
+  Title,
+  Tot,
+} from '../../src/styles/Details/styles';
 import { Info } from '../../src/components/Info';
 
 import { Selected } from '../../src/components/Selected';
 import { VictoryPie, VictoryTooltip } from 'victory-native';
 import { CardSpending } from '../../src/components/CardSpending';
 import { IDeputsResponse } from '../../src/models';
-
-
 
 export default function Det() {
   const { id } = useSearchParams();
@@ -43,7 +46,6 @@ export default function Det() {
 
   const API_URL = 'https://dadosabertos.camara.leg.br/api/v2';
   const queryClient = useQueryClient();
-
 
   const deputy = useQuery<IDeputsResponse>(
     ['deputy', id],
@@ -75,7 +77,7 @@ export default function Det() {
         //initialData:[]//sempre os isLoading vai ser false;
       }
     );
- 
+
   const dataId = [
     { x: 'Despesas com saúde', y: 30 },
     { x: 'Despesas com educação', y: 50 },
@@ -165,7 +167,7 @@ export default function Det() {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (data) {
       const gastos = data.dados.map((item) => ({
         id: item.numDocumento,
         label: item.nomeFornecedor,
@@ -191,11 +193,10 @@ export default function Det() {
       });
       setDataChart(amounts);
       const totalValue = sumValues(amounts);
-      setTotal(totalValue)
+      setTotal(totalValue);
       console.log('Data', amounts);
     }
-  }, [month, id]);
- 
+  }, [month, id, data]);
 
   return (
     <Container>
@@ -224,7 +225,7 @@ export default function Det() {
           </View>
         )}
 
-        <Title>Presenças</Title>
+        <Title>Gastos</Title>
         {/* <ChartBar data={dataChartPresence} /> */}
 
         {/* <Selected selectedValue={year} onValueChange={setYear} /> */}
@@ -240,7 +241,7 @@ export default function Det() {
           </>
         ) : (
           <>
-          <Tot>{`Total:R$${total}`}</Tot>
+            <Tot>{`Total:R$${total}`}</Tot>
             <VictoryPie
               data={dataChart}
               x="label"
