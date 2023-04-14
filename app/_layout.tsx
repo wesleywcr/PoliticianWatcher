@@ -1,7 +1,6 @@
 import React from 'react';
-
 import { useFonts } from 'expo-font';
-import { Stack, Slot } from 'expo-router';
+import {  Slot } from 'expo-router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -21,9 +20,6 @@ export default function RootLayout() {
       <StatusBar style="light" />
       {fontsLoaded ? <Slot /> : <ActivityIndicator color={'red'} />}
     </QueryClientProvider>
-    // <Stack screenOptions={{ headerShown: false }}>
-    //   <Stack.Screen name="index" />
-    //   {/* <Stack.Screen name="details" /> */}
-    // </Stack>
+ 
   );
 }
