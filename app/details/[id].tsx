@@ -133,25 +133,6 @@ export default function Det() {
     }
   }
 
-  // console.warn('Data',data.dados)
-  //  console.warn('fet', isFetched, 'load', isLoading, 'isSuce', isSuccess);
-
-  //  useFocusEffect(
-  //   useCallback(() => {
-  //     // if(isSuccess){
-  //      console.warn('dt',data?.dados)
-  //      const amounts =  amountsSpentPerMonth(data?.dados)
-  //      const totalValue = sumValues(amounts);
-  //      setTotal(totalValue);
-  //      setDataChart(amounts);
-
-  //     // }else{
-  //     //  console.error('Error',error)
-  //     //    setLoading(false);
-  //     // }
-
-  //      },[month,id])
-  //  )
   function handleClick() {
     const amounts = amountsSpentPerMonth(data.dados);
     const totalValue = sumValues(amounts);
@@ -185,6 +166,7 @@ export default function Det() {
       setDataChart(amounts);
       const totalValue = sumValues(amounts);
       setTotal(totalValue);
+
       console.log('Data', amounts);
     }
   }, [month, id, data]);
@@ -232,7 +214,7 @@ export default function Det() {
           </>
         ) : (
           <>
-            <Tot>{`Total:R$${total}`}</Tot>
+            <Tot>{`Total: R$ ${total.toString().replace('.', ',')}`}</Tot>
             <VictoryPie
               data={dataChart}
               x="label"
