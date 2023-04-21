@@ -1,9 +1,9 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
-import {  Slot } from 'expo-router';
+import { Slot } from 'expo-router';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ActivityIndicator } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { ActivityIndicator, StatusBar } from 'react-native';
+
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
@@ -17,9 +17,12 @@ export default function RootLayout() {
   }
   return (
     <QueryClientProvider client={queryClient}>
-      <StatusBar style="light" />
-      {fontsLoaded ? <Slot /> : <ActivityIndicator color={'red'} />}
+      <StatusBar barStyle="light-content" backgroundColor={'#121212'} />
+      {fontsLoaded ? (
+        <Slot />
+      ) : (
+        <ActivityIndicator color={'#051e53'} size={24} />
+      )}
     </QueryClientProvider>
- 
   );
 }
