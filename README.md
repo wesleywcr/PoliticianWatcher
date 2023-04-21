@@ -1,17 +1,24 @@
-<h1 align="center"> <strong>Presidential</strong></h1>
+<h1 align="center"> <strong>📊 Politician Watcher</strong></h1>
 
 <p align="center">
 <img alt="author" src="https://img.shields.io/static/v1?label=WesleyRodrigues&message=Author&color=240b36&labelColor=000000">
 
 </p>
-<h1 align="center">
+<h1 align="center"  justify-content="space-between">
  <img alt="" title="" src=".github/home.png" />
+ <img alt="" title="" src=".github/screen01.png"  />
 </h1>
+<h1 align="center">
+ <img alt="" title="" src=".github/screen02.png"  />
+</h1>
+
 <br />
 
 <br />
+
 # 📕 About
-politician watcher is a project to monitor the expenses of Brazilian deputies
+
+Politician watcher is a project to monitor the expenses of Brazilian deputies.
 </br>
 
 # 🛠️Technologies
