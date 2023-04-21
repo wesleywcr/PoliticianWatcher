@@ -24,8 +24,8 @@ margin-left: 10px;
 export const PoliticalParty = styled.Text`
  font-size: 10px;
  font-family: 'Oswald-Regular';
-  color: #343b44;
-  text-align:justify;
+ color: #343b44;
+ text-align:justify;
   
 `;
 export const Name = styled.Text`

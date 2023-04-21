@@ -30,10 +30,11 @@ export const Tag = styled.View<TagProps>`
 
 export const Title = styled.Text`
   flex: 1;
-  font-weight: bold;
+  font-family: 'Oswald-Bold';
   font-size: 16px;
 `;
 
 export const Amount = styled.Text`
   margin-right: 16px;
+  font-family: 'Oswald-Regular';
 `;
