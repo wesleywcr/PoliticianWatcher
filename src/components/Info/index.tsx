@@ -35,8 +35,8 @@ interface InfoProps {
   schooling: string;
   nationality: string;
   signature: string;
-  urlImage:string;
-  state:string;
+  urlImage: string;
+  state: string;
 }
 export function Info({
   name,
@@ -52,15 +52,13 @@ export function Info({
 }: InfoProps) {
   const Brasao = useImage(require('../../assets/images/brasao.png'));
   const Chip = useImage(require('../../assets/images/chip.png'));
-  const Profile = useImage(
-    urlImage
-  );
+  const Profile = useImage(urlImage);
   const font = useFont(OswaldFont, 18);
   const fontBold = useFont(OswaldFontBold, 18);
   const fontSemiBold = useFont(OswaldFontSemiBold, 18);
   const fontAss = useFont(LobsterFont, 20);
   if (font === null) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator color={'#051e53'} size={24} />;
   }
   return (
     <Canvas style={{ height, width }}>
@@ -99,14 +97,7 @@ export function Info({
               width={120}
               height={120}
             />
-            {/* <Image
-          image={Chip}
-          fit="contain"
-          x={10}
-          y={130}
-          width={80}
-          height={80}
-        /> */}
+
             <Image
               image={Profile}
               fit="contain"
@@ -161,7 +152,7 @@ export function Info({
           y={height - 210}
           font={font}
           color="#343b44"
-          text={dataOfBirth}
+          text={dataOfBirth.split('-').reverse().join('/')}
         />
         <Text x={120} y={height - 190} font={font} color="#343b44" text={cpf} />
         <Text
