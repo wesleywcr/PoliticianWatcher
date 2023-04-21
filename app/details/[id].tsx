@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -6,23 +6,22 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Link, useFocusEffect } from 'expo-router';
-import { useSearchParams } from 'expo-router';
 import axios from 'axios';
-import { useQuery, useQueryClient } from 'react-query';
-import {
-  BoxCard,
-  Container,
-  Title,
-  Tot,
-} from '../../src/styles/Details/styles';
+import { useFocusEffect } from 'expo-router';
+import { useSearchParams } from 'expo-router';
+import { useQuery } from 'react-query';
 import { Info } from '../../src/components/Info';
 
 import { Selected } from '../../src/components/Selected';
 import { VictoryPie, VictoryTooltip } from 'victory-native';
 import { CardSpending } from '../../src/components/CardSpending';
 import { IDeputsResponse } from '../../src/models';
-
+import {
+  BoxCard,
+  Container,
+  Title,
+  Tot,
+} from '../../src/styles/Details/styles';
 export default function Det() {
   const { id } = useSearchParams();
   const [total, setTotal] = useState(0);
@@ -30,7 +29,7 @@ export default function Det() {
   const [dataChart, setDataChart] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [month, setMonth] = useState<any>('2');
-  const [year, setYear] = useState<any>('Janeiro');
+
   const MONTHS = [
     { label: 'Janeiro', value: '1' },
     { label: 'Fevereiro', value: '2' },
@@ -47,7 +46,6 @@ export default function Det() {
   ];
 
   const API_URL = 'https://dadosabertos.camara.leg.br/api/v2';
-  const queryClient = useQueryClient();
 
   const deputy = useQuery<IDeputsResponse>(
     ['deputy', id],
@@ -67,7 +65,7 @@ export default function Det() {
         const response = await axios.get(
           `${API_URL}/deputados/${id}/despesas?ano=2023&mes=${month}`
         );
-        //  console.warn('Log', response.data.dados);
+
         return response.data;
       },
       {
@@ -99,86 +97,47 @@ export default function Det() {
   function sumValues(items: any[]): number {
     return items.reduce((total, item) => total + parseFloat(item.value), 0);
   }
-  function amountsSpentPerMonth(items: any[]) {
-    try {
-      setLoading(true);
-      const gastos = items.map((item) => ({
-        id: item.numDocumento,
-        label: item.nomeFornecedor,
-        value: item.valorDocumento,
-        color: gerarCorAleatoria(),
-      }));
-      const valoresPorRotulo = {};
-      gastos.forEach((item) => {
-        const { label, value } = item;
-        if (valoresPorRotulo[label]) {
-          valoresPorRotulo[label] += value;
-        } else {
-          valoresPorRotulo[label] = value;
-        }
-      });
-      const amounts = Object.keys(valoresPorRotulo).map((label, id) => {
-        return {
-          id,
-          label,
-          value: valoresPorRotulo[label].toFixed(2),
+
+  useFocusEffect(
+    useCallback(() => {
+      if (data) {
+        const gastos = data.dados.map((item) => ({
+          id: item.numDocumento,
+          label: item.nomeFornecedor,
+          value: item.valorDocumento,
           color: gerarCorAleatoria(),
-        };
-      });
-      console.log('Data', amounts);
-      return amounts;
-    } catch (error: any) {
-      console.error('Error', error);
-      setLoading(false);
-    }
-  }
-
-  function handleClick() {
-    const amounts = amountsSpentPerMonth(data.dados);
-    const totalValue = sumValues(amounts);
-  }
-
-  useEffect(() => {
-    if (data) {
-      const gastos = data.dados.map((item) => ({
-        id: item.numDocumento,
-        label: item.nomeFornecedor,
-        value: item.valorDocumento,
-        color: gerarCorAleatoria(),
-      }));
-      const valoresPorRotulo = {};
-      gastos.forEach((item) => {
-        const { label, value } = item;
-        if (valoresPorRotulo[label]) {
-          valoresPorRotulo[label] += value;
-        } else {
-          valoresPorRotulo[label] = value;
-        }
-      });
-      const amounts = Object.keys(valoresPorRotulo).map((label, id) => {
-        return {
-          id,
-          label,
-          value: valoresPorRotulo[label].toFixed(2),
-          color: gerarCorAleatoria(),
-        };
-      });
-      setDataChart(amounts);
-      const totalValue = sumValues(amounts);
-      setTotal(totalValue);
-
-      console.log('Data', amounts);
-    }
-  }, [month, id, data]);
-
+        }));
+        const valoresPorRotulo = {};
+        gastos.forEach((item) => {
+          const { label, value } = item;
+          if (valoresPorRotulo[label]) {
+            valoresPorRotulo[label] += value;
+          } else {
+            valoresPorRotulo[label] = value;
+          }
+        });
+        const amounts = Object.keys(valoresPorRotulo).map((label, id) => {
+          return {
+            id,
+            label,
+            value: valoresPorRotulo[label].toFixed(2),
+            color: gerarCorAleatoria(),
+          };
+        });
+        setDataChart(amounts);
+        const totalValue = sumValues(amounts);
+        setTotal(totalValue);
+      }
+    }, [month, id, data])
+  );
   return (
     <Container>
       {isError && <Text>Error</Text>}
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {deputy.isLoading ? (
-          <ActivityIndicator color={'red'} />
+          <ActivityIndicator color={'#051e53'} size={24} />
         ) : (
-          <View style={{ marginTop: 60, marginBottom: 60, paddingLeft: 10 }}>
+          <View style={{ marginTop: 60, marginBottom: 60, padding: 16 }}>
             <Info
               name={deputy.data.dados.ultimoStatus.nomeEleitoral}
               cpf={deputy.data.dados.cpf}
@@ -199,9 +158,7 @@ export default function Det() {
         )}
 
         <Title>Gastos</Title>
-        {/* <ChartBar data={dataChartPresence} /> */}
 
-        {/* <Selected selectedValue={year} onValueChange={setYear} /> */}
         <Selected
           selectedValue={month}
           onValueChange={setMonth}
@@ -210,11 +167,11 @@ export default function Det() {
 
         {isLoading && !isSuccess ? (
           <>
-            <ActivityIndicator color={'red'} />
+            <ActivityIndicator color={'#051e53'} size={24} />
           </>
         ) : (
           <>
-            <Tot>{`Total: R$ ${total.toString().replace('.', ',')}`}</Tot>
+            {dataChart.length === 0 && <Text>Informações não escontradas</Text>}
             <VictoryPie
               data={dataChart}
               x="label"
@@ -248,7 +205,10 @@ export default function Det() {
                 />
               }
             />
-
+            <Tot>{`Total: R$ ${total
+              .toFixed(2)
+              .toString()
+              .replace('.', ',')}`}</Tot>
             <FlatList
               data={dataChart}
               keyExtractor={(item: any) => item.numDocumento}

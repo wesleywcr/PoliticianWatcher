@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { ReactNode } from 'react';
-import { ActivityIndicator, Dimensions, Text, View } from 'react-native';
-import { Link, useRouter } from 'expo-router';
+import { ActivityIndicator } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Box, Container, Name } from '../../src/styles/Home/styles';
 import { FlashList } from '@shopify/flash-list';
 import { useQuery, useQueryClient } from 'react-query';
@@ -16,12 +15,10 @@ export interface List {
   siglaPartido: string;
   urlFoto: string;
 }
-//const queryClient = new QueryClient();
 
 const API_URL = 'https://dadosabertos.camara.leg.br/api/v2';
 export default function Home() {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const [searchDeputy, setSearchDeputy] = useState('');
 
   const { data, isFetched, isLoading, isError, error } = useQuery<List[]>(
@@ -33,18 +30,14 @@ export default function Home() {
       return response.data.dados;
     },
     {
-      // refetchOnWindowFocus: true,
-      // staleTime: 1000 * 30, //30seg
-      //refetchInterval: 1000 * 20, //20seg
-      //retry: 4,
-      //initialData: [], //sempre os isLoading vai ser false;
+      refetchOnWindowFocus: true,
+      retry: 4,
     }
   );
   console.log('data', data);
 
   function handleSearch() {
     console.log('Searching for', searchDeputy);
-    // setSearchText(search);
   }
   function handleDetails(id: number) {
     console.log('ID', id);
@@ -60,7 +53,7 @@ export default function Home() {
 
       <Box>
         {isLoading ? (
-          <ActivityIndicator color={'red'} />
+          <ActivityIndicator color={'#051e53'} size={24} />
         ) : (
           <FlashList
             data={data}
@@ -83,15 +76,3 @@ export default function Home() {
     </Container>
   );
 }
-// import React from 'react';
-// import { Text, View } from 'react-native';
-// import { Link } from 'expo-router';
-
-// export default function Home() {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text style={{ fontSize: 70 }}>LINK</Text>
-//       <Link href={'/details/5'}>Ver deputado</Link>
-//     </View>
-//   );
-// }
