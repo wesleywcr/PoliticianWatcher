@@ -47,6 +47,6 @@ $ npx expo start
 ```
 
 # 📝License
-
+This project is under MIT license.
 Released in 2023.
 Made with ❤️ by [Wesley Rodrigues](https://github.com/wesleywcr)🤙👊
